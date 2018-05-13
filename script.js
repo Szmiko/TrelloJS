@@ -10,7 +10,7 @@ $(document).ready(function(){
       return str;
   };
 
-	function Column(name) {
+  function Column(name) {
     var self = this;
 
     this.id = randomString();
@@ -78,16 +78,16 @@ $(document).ready(function(){
 		}
 	};
 
-	var board = {
+  var board = {
     name: 'Kanban Board',
     addColumn: function(column) {
       this.$element.append(column.$element);
       initSortable();
     },
     $element: $('#board .column-container')
-	};
+  };
 
-	function initSortable() {
+  function initSortable() {
     $('.column-card-list').sortable({
       connectWith: '.column-card-list',
       placeholder: 'card-placeholder'
@@ -97,7 +97,7 @@ $(document).ready(function(){
   $('.create-column').on('click', function(){
     var columnName = $('#column-name').val();
     if (!columnName.length) columnName = 'Nowa kolumna';
-		var column = new Column(columnName);
+    var column = new Column(columnName);
     board.addColumn(column);
   });
 
