@@ -7,7 +7,7 @@ $(document).ready(function(){
       for (var i = 0; i < 10; i++) {
         str += chars[Math.floor(Math.random() * chars.length)];
       }
-    return str;
+      return str;
   };
 
 	function Column(name) {
@@ -18,26 +18,26 @@ $(document).ready(function(){
     this.$element = createColumn();
 
     function createColumn() {
-    	var $column = $('<div>').addClass('column col-md-4');
-    	var $columnTitle = $('<h2>').addClass('column-title').text(self.name);
-    	var $columnCardList = $('<ul>').addClass('column-card-list col-md-9');
-    	var $columnDelete = $('<button>').addClass('btn-delete col-md-1').text('x');
-		  var $columnAddCard = $('<button>').addClass('add-card col-md-2').text('Add a card');
+      var $column = $('<div>').addClass('column col-md-4');
+      var $columnTitle = $('<h2>').addClass('column-title').text(self.name);
+      var $columnCardList = $('<ul>').addClass('column-card-list col-md-9');
+      var $columnDelete = $('<button>').addClass('btn-delete col-md-1').text('x');
+      var $columnAddCard = $('<button>').addClass('add-card col-md-2').text('Add a card');
 
-		  $columnDelete.on('click', function() {
+      $columnDelete.on('click', function() {
         self.removeColumn();
         alert('Column deleted.');
-		  });
+      });
 
       $columnAddCard.on('click', function() {
         self.addCard(new Card(prompt("Enter the name of the card")));
-		  });
+      });
 
-		  $column.append($columnTitle)
+      $column.append($columnTitle)
       .append($columnDelete)
       .append($columnAddCard)
       .append($columnCardList);
-		  return $column;
+      return $column;
     };
   };
 
@@ -67,13 +67,13 @@ $(document).ready(function(){
       });
 
       $card.append($cardDelete)
-		   .append($cardDescription);
-		  return $card;
+      .append($cardDescription);
+      return $card;
     };
   };
 
   Card.prototype = {
-		removeCard: function() {
+    removeCard: function() {
 			this.$element.remove();
 		}
 	};
@@ -81,22 +81,23 @@ $(document).ready(function(){
 	var board = {
     name: 'Kanban Board',
     addColumn: function(column) {
-     	this.$element.append(column.$element);
+      this.$element.append(column.$element);
       initSortable();
-   	},
+    },
     $element: $('#board .column-container')
 	};
 
 	function initSortable() {
-   	$('.column-card-list').sortable({
-     	connectWith: '.column-card-list',
-     	placeholder: 'card-placeholder'
-   		}).disableSelection();
- 	};
+    $('.column-card-list').sortable({
+      connectWith: '.column-card-list',
+      placeholder: 'card-placeholder'
+      }).disableSelection();
+  };
 
- 	$('.create-column').on('click', function(){
-		var name = prompt('Enter a column name');
-		var column = new Column(name);
+  $('.create-column').on('click', function(){
+    var columnName = $('#column-name').val();
+    if (!columnName.length) columnName = 'Nowa kolumna';
+		var column = new Column(columnName);
     board.addColumn(column);
   });
 
